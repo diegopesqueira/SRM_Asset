@@ -60,11 +60,12 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
 
 ## **Como Subir o Ambiente**
 1. Clone o repositório e acesse a pasta raiz do projeto.
-   ├── git clone https://github.com/diegopesqueira/SRM_Asset.git
+   ```├── git clone https://github.com/diegopesqueira/SRM_Asset.git```
 
 2. docker compose up -d --build
 
 3. Copie os scripts.py para as respectivas pastas: 
+   ```
    receita_spark
    ├── docker cp <diretório>/Git/scripts/receita_spark/. airflow-scheduler:/opt/airflow/receita_spark
    └── docker cp <diretório>/Git/scripts/receita_spark/. airflow-webserver:/opt/airflow/receita_spark
@@ -74,6 +75,7 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
    DAGs
    ├── docker cp <diretório>/Git/scripts/DAG/. airflow-scheduler:/opt/airflow/dags
    └── docker cp <diretório>/Git/scripts/DAG/. airflow-webserver:/opt/airflow/dags
+   ```
 
 4. Os softwares estão configurados nas seguintes portas: 
    minIO   -> http://localhost:9001/
