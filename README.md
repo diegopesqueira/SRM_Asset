@@ -56,7 +56,7 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
 ├── Dockerfile.airflow                             # Imagem customizada do Airflow
 ├── docker-compose.yaml                            # Orquestração dos containers
 └── requirements.txt                               # Dependências Python do projeto
-
+---
 ###Como Subir o Ambiente
 1. Clone o repositório e acesse a pasta raiz do projeto.
    ├── git clone https://github.com/diegopesqueira/SRM_Asset.git
