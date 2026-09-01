@@ -36,7 +36,7 @@ def executa_unzip(**context):
     output_dir = context["params"].get("output_dir", "/opt/airflow/dados_temp/unzip")
 
     print(f"[DAG] Iniciando descompactação dos arquivos para o mês: {mes_ref}")
-    unzipper = UnzipFiles(reference_month=mes_ref, input_dir=download_dir, output_dir=output_dir)
+    unzipper = UnzipFiles(reference_month=mes_ref, zip_directory=download_dir, output_directory=output_dir)
     unzipper.run()
 
 
