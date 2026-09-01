@@ -1,5 +1,6 @@
-import sys
 import re
+import shutil
+import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -53,13 +54,17 @@ class UnzipFiles:
         final_target_dir = self.output_directory / target_folder
         final_target_dir.mkdir(parents=True, exist_ok=True)
 
-        prefix_temp = f"extract_{entity}_"
-        with tempfile.TemporaryDirectory(prefix=prefix_temp) as temp_dir:
+        prefix_temp = f"_tmp_extract_{entity}_"
+        # dir=final_target_dir garante que a pasta temporária seja criada no mesmo volume de destino
+        with tempfile.TemporaryDirectory(
+            prefix=prefix_temp, dir=final_target_dir
+        ) as temp_dir:
             temp_extract_path = Path(temp_dir)
 
             print(
                 f"[INFO] Extraindo {zip_path.name} para a "
-                f"entidade '{entity}'..."
+                f"entidade '{entity}'...",
+                flush=True,
             )
             with zipfile.ZipFile(zip_path, "r") as zip_ref:
                 zip_ref.extractall(temp_extract_path)
@@ -71,7 +76,8 @@ class UnzipFiles:
             if not extracted_files:
                 print(
                     "[WARN] Nenhum arquivo encontrado dentro de "
-                    f"{zip_path.name}"
+                    f"{zip_path.name}",
+                    flush=True,
                 )
                 return
 
@@ -88,31 +94,51 @@ class UnzipFiles:
                 if new_path.exists():
                     print(
                         "[INFO] Arquivo já existe no destino: "
-                        f"{new_path.name}, pulando..."
+                        f"{new_path.name}, pulando...",
+                        flush=True,
                     )
                 else:
-                    f.rename(new_path)
-                    print(f"[OK] Arquivo gerado: {new_path.name}")
+                    shutil.move(str(f), str(new_path))
+                    print(
+                        f"[OK] Arquivo gerado: {new_path.name}",
+                        flush=True,
+                    )
 
     def run(self) -> None:
-        zip_files = sorted(self.zip_directory.glob("*.zip"))
+        zip_files = sorted(list(self.zip_directory.glob("*.zip")) +
+                           list(self.zip_directory.glob("*.ZIP"))
+                          )
+
+        zip_files = sorted(list(set(zip_files)))
+
         if not zip_files:
             dir_path = self.zip_directory.resolve()
-            print(f"[WARN] Nenhum arquivo ZIP encontrado em {dir_path}")
+            print(
+                f"[WARN] Nenhum arquivo ZIP encontrado em {dir_path}",
+                flush=True,
+            )
             return
 
         print(
-            f"[INFO] Iniciando extração de {len(zip_files)} arquivos ZIP..."
+            f"[INFO] Iniciando extração de {len(zip_files)} arquivos ZIP...",
+            flush=True,
         )
         for zip_path in zip_files:
             try:
                 self.process_zip(zip_path)
             except Exception as exc:
-                print(f"[ERRO] Falha ao processar {zip_path.name}: {exc}")
+                print(
+                    f"[ERRO] Falha ao processar {zip_path.name}: {exc}",
+                    flush=True,
+                )
 
-        print("\n" + "=" * 70)
-        print("PROCESSO DE EXTRAÇÃO E PADRONIZAÇÃO FINALIZADO COM SUCESSO")
-        print("=" * 70)
+        print("\n" + "=" * 70, flush=True)
+        print(
+            "PROCESSO DE EXTRAÇÃO E PADRONIZAÇÃO FINALIZADO COM SUCESSO",
+            flush=True,
+        )
+        print("=" * 70, flush=True)
+
 
 if __name__ == "__main__":
     zip_dir = (
