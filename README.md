@@ -64,9 +64,9 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
    ├── git clone https://github.com/diegopesqueira/SRM_Asset.git
    ```
 
-3. docker compose up -d --build
+2. docker compose up -d --build
 
-4. Copie os scripts.py para as respectivas pastas: 
+3. Copie os scripts.py para as respectivas pastas: 
    ```
    receita_spark
    ├── docker cp <diretório>/Git/scripts/receita_spark/. airflow-scheduler:/opt/airflow/receita_spark
@@ -79,14 +79,14 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
    └── docker cp <diretório>/Git/scripts/DAG/. airflow-webserver:/opt/airflow/dags
    ```
 
-5. Os softwares estão configurados nas seguintes portas: 
+4. Os softwares estão configurados nas seguintes portas: 
    ```
    minIO   -> http://localhost:9001/
    spark   -> http://localhost:8080/
    airflow -> http://localhost:8081/
    ```
 
-6. As Dags estão classificadas por ordem de execução
+5. As Dags estão classificadas por ordem de execução
 
 ### Python
 ```
@@ -117,9 +117,9 @@ Ordem de Execução:
 └── 08_gera_dashboard
 ```
 
-7. Os arquivos estão disponibilizados no minIO através do link informado acima.
+6. Os arquivos estão disponibilizados no minIO através do link informado acima.
 
-8. Senhas de acesso: 
+7. Senhas de acesso: 
    
    airflow: 
       user: admin
