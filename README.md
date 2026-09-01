@@ -99,6 +99,9 @@ Ordem de Execução:
 ├── 104_carga_municipios_silver_contingencia
 ├── 105_carga_matriz_filial_gold_contingencia
 └── 106_gera_dashboard
+
+Executar Pipeline Completo
+├── 100_pipeline_consolidado_receita_federal
 ```
 
 ###Pyspark
@@ -112,9 +115,6 @@ Ordem de Execução:
 ├── 06_carga_municipios_silver
 ├── 07_carga_gold_matriz_x_filial
 └── 08_gera_dashboard
-
-Executar Pipeline Completo
-├── 100_pipeline_consolidado_receita_federal
 ```
 
 7. Os arquivos estão disponibilizados no minIO através do link informado acima.
