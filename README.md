@@ -88,6 +88,39 @@ Pipeline orquestrado via **Apache Airflow** rodando em **Docker**, responsável 
 
 6. As Dags estão classificadas por ordem de execução
 
+### Python
+```
+Ordem de Execução:
+├── 01_download_arquivos_receita_federal
+├── 02_descompacta_arquivos
+├── 101_carga_estabelecimentos_bronze_contingencia
+├── 102_carga_estabelecimentos_silver_contingencia
+├── 103_carga_municipios_bronze_contingencia
+├── 104_carga_municipios_silver_contingencia
+├── 105_carga_matriz_filial_gold_contingencia
+└── 106_gera_dashboard
+
+Executar Pipeline Completo
+├── 100_pipeline_consolidado_receita_federal
+```
+
+###Pyspark
+```
+Ordem de Execução:
+├── 01_download_arquivos_receita_federal
+├── 02_descompacta_arquivos
+├── 03_carga_estabelecimentos_bronze
+├── 04_carga_municipios_bronze
+├── 05_carga_estabelecimentos_silver
+├── 06_carga_municipios_silver
+├── 07_carga_gold_matriz_x_filial
+├── 105_carga_matriz_filial_gold_contingencia
+└── 106_gera_dashboard
+
+Executar Pipeline Completo
+├── 100_pipeline_consolidado_receita_federal
+```
+
 7. Os arquivos estão disponibilizados no minIO através do link informado acima.
 
 8. Senhas de acesso: 
